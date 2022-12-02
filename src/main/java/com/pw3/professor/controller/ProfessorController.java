@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-//@CrossOrigin("http://localhost:4200") //aceitando requisicao desse endereco
+@CrossOrigin("http://localhost:4200") //aceitando requisicao desse endereco
 @RestController
 public class ProfessorController {
     @Autowired
