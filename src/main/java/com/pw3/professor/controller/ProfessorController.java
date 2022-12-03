@@ -4,6 +4,7 @@ import com.pw3.professor.model.Professor;
 import com.pw3.professor.model.Sexo;
 import com.pw3.professor.repository.ProfessorRepository;
 
+import org.hibernate.engine.spi.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,19 @@ public class ProfessorController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping(value = "api/professores/{id}")
+    public ResponseEntity<Professor> getProfessor(@PathVariable(value = "id")long id){
+        try {
+            Optional<Professor>professor = professorRepository.findById(id);
+            return professor.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+        } catch(Exception e){
+            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+    }
+
+
+
     @PostMapping(value = "api/professores")
     public ResponseEntity<Professor> postProfessor(@RequestParam Map<String, String> newProfessor){  //newProfessor nome do map
         try{
