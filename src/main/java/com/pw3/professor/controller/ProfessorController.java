@@ -30,7 +30,7 @@ public class ProfessorController {
         }
     }
 
-    @GetMapping(value = "api/professores/{id}")
+    @GetMapping(value = "api/professores/{id}") //nome consertado
     public ResponseEntity<Professor> getProfessor(@PathVariable(value = "id")long id){
         try {
             Optional<Professor>professor = professorRepository.findById(id);
